@@ -1,0 +1,21 @@
+[project]
+name = "cv-evaluator-app"
+version = "0.1.0"
+description = "Evaluate CVs and implement LLMs to help the review process"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "pandas==1.5.*",
+  "streamlit==1.35.*",
+  "plotly==5.20.*",
+  "matplotlib==3.8.*",
+  "boto3==1.33.*",
+  "click==8.1.*",
+  "numpy==1.26.*",
+  "pyarrow==14.0.*",
+  "scipy==1.11.*",
+  "pydantic==2.5.*",
+  "streamlit-pdf-viewer==0.0.21",
+  "black==23.3.0",
+  "isort==5.10.1"
+]
