@@ -2,6 +2,8 @@ import streamlit as st
 from streamlit_pdf_viewer import pdf_viewer
 
 from src.constants import PDF_WIDTH, PDF_HEIGHT
+
+
 def add_n_whitespaces_to_obj(n: int, obj: str) -> None:
     """Add n whitespaces to the object."""
     [obj.write("") for _ in range(n)]

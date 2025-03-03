@@ -53,11 +53,7 @@ def save_metadata(candidate_id: str, metadata: CandidateMetadata) -> None:
 
 def get_all_candidates() -> list[str]:
     """Return a list of candidate IDs (folder names) in the BASE_DIR."""
-    return [
-        folder
-        for folder in os.listdir(BASE_DIR)
-        if os.path.isdir(os.path.join(BASE_DIR, folder))
-    ]
+    return [folder for folder in os.listdir(BASE_DIR) if os.path.isdir(os.path.join(BASE_DIR, folder))]
 
 
 def get_all_candidates_for_first_interview() -> list[str]:
@@ -65,8 +61,7 @@ def get_all_candidates_for_first_interview() -> list[str]:
     return [
         folder
         for folder in os.listdir(BASE_DIR)
-        if os.path.isdir(os.path.join(BASE_DIR, folder))
-        and load_metadata(folder).status_initial_screening == APPROVED
+        if os.path.isdir(os.path.join(BASE_DIR, folder)) and load_metadata(folder).status_initial_screening == APPROVED
     ]
 
 
@@ -75,10 +70,8 @@ def get_all_candidates_for_second_interview() -> list[str]:
     return [
         folder
         for folder in os.listdir(BASE_DIR)
-        if os.path.isdir(os.path.join(BASE_DIR, folder))
-        and load_metadata(folder).status_first_interview == APPROVED
+        if os.path.isdir(os.path.join(BASE_DIR, folder)) and load_metadata(folder).status_first_interview == APPROVED
     ]
-
 
 
 def load_interview_questions(candidate_id: str) -> InterviewQuestionList:

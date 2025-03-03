@@ -1,5 +1,6 @@
 # Project specific
 candidates/
+models/deepseek/
 
 # Node artifact files
 node_modules/
@@ -9,6 +10,7 @@ dist/
 *.csv
 *.pem
 *.parquet
+*.zip
 
 # Compiled Java class files
 *.class

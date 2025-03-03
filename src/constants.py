@@ -6,8 +6,13 @@ REJECTED = "rejected"
 PENDING = "pending"
 SKIPPED = "skipped"
 
-
 PDF_WIDTH = 1500
 PDF_HEIGHT = 1500
 
 APP_PAGES = ["Upload CVs", "Evaluate Candidate", "Interview", "Overview"]
+
+#### DOCUMENT CONFIGS
+CHUNK_SIZE = 1000
+CHUNK_OVERLAP = 200
+
+STRICTNESS_LEVELS = ["Very Strict", "Moderately Strict", "Moderately Lenient", "Very Lenient"]
