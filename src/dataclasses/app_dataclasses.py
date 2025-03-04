@@ -19,8 +19,8 @@ class CandidateMetadata(BaseModel):
 
 
 class CandidateFactory:
-    def create_candidate(self, candidate_params: dict[str, Any]):
-        if "id" not in candidate_params:
+    def create_candidate(candidate_params: dict[str, Any]):
+        if "id" not in candidate_params.keys():
             raise ValueError("The `id` parameter is required when creating a candidate.")
 
         return CandidateMetadata(**candidate_params)

@@ -19,6 +19,15 @@ def get_candidate_filename(metadata: CandidateMetadata) -> str:
     return os.path.join(get_candidate_folder(candidate_id), "cv.pdf")
 
 
+def get_all_candidates_metadata(attribute: str | None = None) -> list[CandidateMetadata]:
+    """Return a list of all candidate metadata in the BASE_DIR."""
+    candidates = get_all_candidates()
+    metadata = [load_metadata(candidate_id) for candidate_id in candidates]
+    if attribute:
+        return [getattr(metadata, attribute) for metadata in metadata]
+    return metadata
+
+
 def save_cv_file(uploaded_file: BytesIO, candidate_id: str) -> str:
     """Save the uploaded PDF to the candidate's directory."""
     candidate_dir = get_candidate_folder(candidate_id)

@@ -6,6 +6,13 @@ REJECTED = "rejected"
 PENDING = "pending"
 SKIPPED = "skipped"
 
+STATUS_COLOR_MAPPING = {
+    "APPROVED": "#2E8B57",
+    "REJECTED": "#D32F2F",
+    "PENDING": "#FBC02D", 
+    "SKIPPED": "#757575", 
+}
+
 PDF_WIDTH = 1500
 PDF_HEIGHT = 1500
 

@@ -9,8 +9,8 @@ from src.file_management.file_management import (
     save_interview_questions, 
     save_metadata
 )
-from src.streamlit.streamlit_utils import add_n_whitespaces, display_pdf
-from src.constants import APPROVED, REJECTED, SKIPPED, PDF_HEIGHT, PDF_WIDTH
+from src.streamlit.streamlit_utils import add_n_whitespaces, display_pdf, write_status_in_colors
+from src.constants import APPROVED, REJECTED, SKIPPED, PDF_HEIGHT, PDF_WIDTH, STATUS_COLOR_MAPPING
 
 def interview_page():
     st.title("Interview")
@@ -26,6 +26,8 @@ def interview_page():
 
         st.write(f"**CV filename:** {metadata.filename}")
         add_n_whitespaces(1)
+
+        write_status_in_colors(metadata.status_first_interview.upper(), STATUS_COLOR_MAPPING)
 
         candidate_file_path = get_candidate_filename(metadata)
 

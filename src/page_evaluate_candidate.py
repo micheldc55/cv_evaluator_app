@@ -58,7 +58,6 @@ def evaluate_candidate_page():
         generate_fit_report = col2.button("Generate Fit Report")
         ask_questions = col3.button("Ask Questions about CV")
         
-        ##################
         if (generate_summary) and (metadata.llm_summary_candidate == ""):
             documents = load_raw_document(candidate_file_path)
 
@@ -87,13 +86,15 @@ def evaluate_candidate_page():
                 "strictness_level": strictness_level
             })
 
-            st.write(response.content)
             metadata.llm_fit_report_candidate = response.content
             save_metadata(selected_candidate, metadata)
             st.success("Fit report generated and saved to user metadata successfully.")
 
-        ##################
-
+        if metadata.llm_fit_report_candidate:
+            st.write(metadata.llm_fit_report_candidate)
+        else:
+            st.info("No fit report generated.")
+            
         st.write(
             "Indicate below if the candidate should be approved or rejected to be called in for the first interview."
         )
