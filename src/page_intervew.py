@@ -1,16 +1,16 @@
 import streamlit as st
-
+from src.constants import APPROVED, PDF_HEIGHT, PDF_WIDTH, REJECTED, SKIPPED, STATUS_COLOR_MAPPING
 from src.dataclasses.app_dataclasses import InterviewQuestion
 from src.file_management.file_management import (
-    get_all_candidates_for_first_interview, 
-    load_metadata, 
-    get_candidate_filename, 
-    load_interview_questions, 
-    save_interview_questions, 
-    save_metadata
+    get_all_candidates_for_first_interview,
+    get_candidate_filename,
+    load_interview_questions,
+    load_metadata,
+    save_interview_questions,
+    save_metadata,
 )
 from src.streamlit.streamlit_utils import add_n_whitespaces, display_pdf, write_status_in_colors
-from src.constants import APPROVED, REJECTED, SKIPPED, PDF_HEIGHT, PDF_WIDTH, STATUS_COLOR_MAPPING
+
 
 def interview_page():
     st.title("Interview")

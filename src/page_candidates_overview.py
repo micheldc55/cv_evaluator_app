@@ -1,5 +1,4 @@
 import streamlit as st
-
 from src.file_management.file_management import get_all_candidates, load_metadata
 
 
@@ -24,5 +23,3 @@ def overview_page():
                 }
             )
         st.table(overview_data)
-
-

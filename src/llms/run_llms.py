@@ -1,8 +1,7 @@
 import os
 
 import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM
-
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 model_path = "models/deepseek/deepseek-llm-7b-chat"
 

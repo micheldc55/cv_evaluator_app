@@ -1,12 +1,11 @@
 import streamlit as st
-
 from src.constants import APP_PAGES
 from src.llms.llm_utils import save_key_to_session
-from src.streamlit.streamlit_utils import add_n_whitespaces_to_obj
-from src.page_upload_cv import upload_cv_page
+from src.page_candidates_overview import overview_page
 from src.page_evaluate_candidate import evaluate_candidate_page
 from src.page_intervew import interview_page
-from src.page_candidates_overview import overview_page
+from src.page_upload_cv import upload_cv_page
+from src.streamlit.streamlit_utils import add_n_whitespaces_to_obj
 
 st.set_page_config(layout="wide")
 

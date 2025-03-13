@@ -2,11 +2,12 @@ import json
 import os
 
 import openai
-import streamlit as st
-from langchain_community.document_loaders import PyPDFLoader
 from langchain.schema import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import PyPDFLoader
 from langchain_core.prompts import ChatPromptTemplate
+
+import streamlit as st
 
 
 def save_key_to_session(key: str) -> None:

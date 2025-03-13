@@ -1,7 +1,7 @@
-import streamlit as st
 from streamlit_pdf_viewer import pdf_viewer
 
-from src.constants import PDF_WIDTH, PDF_HEIGHT
+import streamlit as st
+from src.constants import PDF_HEIGHT, PDF_WIDTH
 
 
 def add_n_whitespaces_to_obj(n: int, obj: str) -> None:
@@ -35,7 +35,7 @@ def pdf_viewer_setup() -> tuple[int, int]:
 
 def write_status_in_colors(current_status: str, status_mapping_html: dict[str, str], font_size: int = 16) -> None:
     """Write the status in colors.
-    
+
     - color_mapping_html: a dictionary mapping status to HTML color code. E.g:
         {
             "APPROVED": "#008000",

@@ -2,7 +2,7 @@ from typing import Any
 
 from pydantic import BaseModel
 
-from src.constants import PENDING, APPROVED
+from src.constants import APPROVED, PENDING
 
 
 class CandidateMetadata(BaseModel):

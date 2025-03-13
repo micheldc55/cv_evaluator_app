@@ -1,23 +1,19 @@
-
-import streamlit as st
-
 from langchain.chains import load_summarize_chain
 from langchain_community.chat_models import ChatOpenAI
 
-from src.constants import APPROVED, REJECTED, SKIPPED, STRICTNESS_LEVELS, BASE_QUESTIONS
+import streamlit as st
+from src.constants import APPROVED, BASE_QUESTIONS, REJECTED, SKIPPED, STRICTNESS_LEVELS
 from src.file_management.file_management import (
-    get_all_candidates, 
-    load_metadata, 
+    get_all_candidates,
     get_candidate_filename,
-    save_metadata,
+    load_metadata,
     read_dict_into_iq_list,
-    save_interview_questions
-)
-from src.streamlit.streamlit_utils import (
-    add_n_whitespaces, pdf_viewer_setup, display_pdf
+    save_interview_questions,
+    save_metadata,
 )
 from src.llms.configs.llm_message_templates import FIT_REPORT_TEMPLATE
-from src.llms.llm_utils import load_raw_document, convert_message_tuple_to_template
+from src.llms.llm_utils import convert_message_tuple_to_template, load_raw_document
+from src.streamlit.streamlit_utils import add_n_whitespaces, display_pdf, pdf_viewer_setup
 
 
 def evaluate_candidate_page():
@@ -49,24 +45,28 @@ def evaluate_candidate_page():
 
         st.subheader("LLM Review:")
 
-        st.write("Below you have some options available to you in order to use LLMs to simplify the process. You can use the LLM to summarize the candidate's CV or ask questions about the CV.")
-        st.write("If you want to generate the fit report which measures the candidate's fit for the role, you need to input the job description first.")
+        st.write(
+            "Below you have some options available to you in order to use LLMs to simplify the process. You can use the LLM to summarize the candidate's CV or ask questions about the CV."
+        )
+        st.write(
+            "If you want to generate the fit report which measures the candidate's fit for the role, you need to input the job description first."
+        )
 
         job_description = st.text_area("Job Description:")
         strictness_level = st.selectbox("Strictness Level", STRICTNESS_LEVELS)
-        
+
         col1, col2, col3, _ = st.columns([1, 1, 1, 1])
         generate_summary = col1.button("Generate Summary")
         generate_fit_report = col2.button("Generate Fit Report")
         ask_questions = col3.button("Ask Questions about CV")
-        
+
         if (generate_summary) and (metadata.llm_summary_candidate == ""):
             documents = load_raw_document(candidate_file_path)
 
             llm = ChatOpenAI(model="gpt-4o", temperature=0, api_key=st.session_state["OPENAI_API_KEY"])
             chain = load_summarize_chain(llm, chain_type="stuff", verbose=True)
             response = chain.run(documents)
-            
+
             st.write(response)
             st.write(documents)
 
@@ -82,11 +82,9 @@ def evaluate_candidate_page():
             messages = convert_message_tuple_to_template(FIT_REPORT_TEMPLATE)
             chain = messages | llm
 
-            response = chain.invoke({
-                "job_description": job_description,
-                "candidate_cv": documents,
-                "strictness_level": strictness_level
-            })
+            response = chain.invoke(
+                {"job_description": job_description, "candidate_cv": documents, "strictness_level": strictness_level}
+            )
 
             metadata.llm_fit_report_candidate = response.content
             save_metadata(selected_candidate, metadata)

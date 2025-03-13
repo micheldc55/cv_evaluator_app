@@ -2,8 +2,8 @@ import json
 import os
 from io import BytesIO
 
-from src.dataclasses.app_dataclasses import CandidateMetadata, InterviewQuestionList
 from src.constants import APPROVED, BASE_DIR
+from src.dataclasses.app_dataclasses import CandidateMetadata, InterviewQuestionList
 
 os.makedirs(BASE_DIR, exist_ok=True)
 
