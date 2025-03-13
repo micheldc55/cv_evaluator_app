@@ -2,9 +2,9 @@ import uuid
 
 import streamlit as st
 
-from src.file_management.file_management import save_cv_file, save_metadata, get_all_candidates_metadata
-from src.dataclasses.app_dataclasses import CandidateFactory
-from src.constants import PENDING
+from src.file_management.file_management import save_cv_file, save_metadata, get_all_candidates_metadata, save_interview_questions
+from src.dataclasses.app_dataclasses import CandidateFactory, InterviewQuestionList
+from src.constants import PENDING, BASE_QUESTIONS
 
 
 def upload_cv_page():
@@ -35,9 +35,14 @@ def upload_cv_page():
                         "status_first_interview": PENDING,
                         "status_second_interview": PENDING,
                         "filename": uploaded_file.name,
+
                     }
                 )
                 save_metadata(candidate_id, default_metadata)
+
+                default_interview_questions = InterviewQuestionList(**BASE_QUESTIONS)
+                save_interview_questions(candidate_id, default_interview_questions)
+                
                 st.success(f"Uploaded and saved CV for candidate ID: {candidate_id}")
             
     elif submit_files and not uploaded_files:

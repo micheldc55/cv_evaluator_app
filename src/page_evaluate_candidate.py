@@ -4,12 +4,14 @@ import streamlit as st
 from langchain.chains import load_summarize_chain
 from langchain_community.chat_models import ChatOpenAI
 
-from src.constants import APPROVED, REJECTED, SKIPPED, STRICTNESS_LEVELS
+from src.constants import APPROVED, REJECTED, SKIPPED, STRICTNESS_LEVELS, BASE_QUESTIONS
 from src.file_management.file_management import (
     get_all_candidates, 
     load_metadata, 
     get_candidate_filename,
-    save_metadata
+    save_metadata,
+    read_dict_into_iq_list,
+    save_interview_questions
 )
 from src.streamlit.streamlit_utils import (
     add_n_whitespaces, pdf_viewer_setup, display_pdf
@@ -94,7 +96,7 @@ def evaluate_candidate_page():
             st.write(metadata.llm_fit_report_candidate)
         else:
             st.info("No fit report generated.")
-            
+
         st.write(
             "Indicate below if the candidate should be approved or rejected to be called in for the first interview."
         )
@@ -110,6 +112,9 @@ def evaluate_candidate_page():
                 metadata.status_initial_screening = APPROVED
                 save_metadata(selected_candidate, metadata)
 
+                base_questions = read_dict_into_iq_list(BASE_QUESTIONS)
+                save_interview_questions(selected_candidate, base_questions)
+
                 candidacy_message = f"Candidate {selected_candidate} {APPROVED}."
 
         with col2:
@@ -121,6 +126,9 @@ def evaluate_candidate_page():
                 metadata.status_first_interview = SKIPPED
                 metadata.status_second_interview = SKIPPED
                 save_metadata(selected_candidate, metadata)
+
+                base_questions = read_dict_into_iq_list(BASE_QUESTIONS)
+                save_interview_questions(selected_candidate, base_questions)
 
                 candidacy_message = f"Candidate {selected_candidate} {REJECTED}."
 

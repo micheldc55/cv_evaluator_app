@@ -28,6 +28,7 @@ def interview_page():
         add_n_whitespaces(1)
 
         write_status_in_colors(metadata.status_first_interview.upper(), STATUS_COLOR_MAPPING)
+        add_n_whitespaces(2)
 
         candidate_file_path = get_candidate_filename(metadata)
 
@@ -57,7 +58,7 @@ def interview_page():
                     st.warning("Invalid score input, please enter a number.")
                 st.markdown("---")
 
-            new_question = st.text_input("Add a new Interview Question", key="new_question")
+            new_question = st.text_area("Add a new Interview Question", key="new_question", height=100)
             if st.button("Add Question"):
                 if new_question.strip() != "":
                     iq_list.questions.append(InterviewQuestion(question=new_question))

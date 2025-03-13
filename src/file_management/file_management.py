@@ -106,4 +106,11 @@ def save_interview_questions(candidate_id: str, iq_list: InterviewQuestionList):
     os.makedirs(candidate_dir, exist_ok=True)
     filepath = os.path.join(candidate_dir, "interview_questions.json")
     with open(filepath, "w") as f:
-        f.write(iq_list.json())
+        f.write(json.dumps(iq_list.model_dump()))
+
+
+def read_dict_into_iq_list(data: dict) -> InterviewQuestionList:
+    """
+    Read a dictionary into an InterviewQuestionList.
+    """
+    return InterviewQuestionList.model_validate(data)
