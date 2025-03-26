@@ -2,8 +2,8 @@ import json
 import os
 from io import BytesIO
 
-from src.app_dataclasses import CandidateMetadata, InterviewQuestionList
 from src.constants import APPROVED, BASE_DIR
+from src.dataclasses.app_dataclasses import CandidateMetadata, InterviewQuestionList
 
 os.makedirs(BASE_DIR, exist_ok=True)
 
@@ -17,6 +17,15 @@ def get_candidate_filename(metadata: CandidateMetadata) -> str:
     """Return the filename of the candidate's CV."""
     candidate_id = metadata.id
     return os.path.join(get_candidate_folder(candidate_id), "cv.pdf")
+
+
+def get_all_candidates_metadata(attribute: str | None = None) -> list[CandidateMetadata]:
+    """Return a list of all candidate metadata in the BASE_DIR."""
+    candidates = get_all_candidates()
+    metadata = [load_metadata(candidate_id) for candidate_id in candidates]
+    if attribute:
+        return [getattr(metadata, attribute) for metadata in metadata]
+    return metadata
 
 
 def save_cv_file(uploaded_file: BytesIO, candidate_id: str) -> str:
@@ -53,11 +62,7 @@ def save_metadata(candidate_id: str, metadata: CandidateMetadata) -> None:
 
 def get_all_candidates() -> list[str]:
     """Return a list of candidate IDs (folder names) in the BASE_DIR."""
-    return [
-        folder
-        for folder in os.listdir(BASE_DIR)
-        if os.path.isdir(os.path.join(BASE_DIR, folder))
-    ]
+    return [folder for folder in os.listdir(BASE_DIR) if os.path.isdir(os.path.join(BASE_DIR, folder))]
 
 
 def get_all_candidates_for_first_interview() -> list[str]:
@@ -65,8 +70,7 @@ def get_all_candidates_for_first_interview() -> list[str]:
     return [
         folder
         for folder in os.listdir(BASE_DIR)
-        if os.path.isdir(os.path.join(BASE_DIR, folder))
-        and load_metadata(folder).status_initial_screening == APPROVED
+        if os.path.isdir(os.path.join(BASE_DIR, folder)) and load_metadata(folder).status_initial_screening == APPROVED
     ]
 
 
@@ -75,10 +79,8 @@ def get_all_candidates_for_second_interview() -> list[str]:
     return [
         folder
         for folder in os.listdir(BASE_DIR)
-        if os.path.isdir(os.path.join(BASE_DIR, folder))
-        and load_metadata(folder).status_first_interview == APPROVED
+        if os.path.isdir(os.path.join(BASE_DIR, folder)) and load_metadata(folder).status_first_interview == APPROVED
     ]
-
 
 
 def load_interview_questions(candidate_id: str) -> InterviewQuestionList:
@@ -104,4 +106,11 @@ def save_interview_questions(candidate_id: str, iq_list: InterviewQuestionList):
     os.makedirs(candidate_dir, exist_ok=True)
     filepath = os.path.join(candidate_dir, "interview_questions.json")
     with open(filepath, "w") as f:
-        f.write(iq_list.json())
+        f.write(json.dumps(iq_list.model_dump()))
+
+
+def read_dict_into_iq_list(data: dict) -> InterviewQuestionList:
+    """
+    Read a dictionary into an InterviewQuestionList.
+    """
+    return InterviewQuestionList.model_validate(data)

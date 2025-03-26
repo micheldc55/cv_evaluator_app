@@ -1,6 +1,8 @@
+from typing import Any
+
 from pydantic import BaseModel
 
-from src.constants import PENDING, APPROVED
+from src.constants import APPROVED, PENDING
 
 
 class CandidateMetadata(BaseModel):
@@ -8,10 +10,20 @@ class CandidateMetadata(BaseModel):
     name: str = ""
     surname: str = ""
     comments: str = ""
+    llm_summary_candidate: str = ""
+    llm_fit_report_candidate: str = ""
     status_initial_screening: str = APPROVED
     status_first_interview: str = PENDING
     status_second_interview: str = PENDING
     filename: str = ""
+
+
+class CandidateFactory:
+    def create_candidate(candidate_params: dict[str, Any]):
+        if "id" not in candidate_params.keys():
+            raise ValueError("The `id` parameter is required when creating a candidate.")
+
+        return CandidateMetadata(**candidate_params)
 
 
 class InterviewQuestion(BaseModel):
