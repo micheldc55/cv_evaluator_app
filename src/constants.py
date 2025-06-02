@@ -118,19 +118,19 @@ BASE_QUESTIONS = {
             "feedback": "",
         },
         {
-            "question": "PROGRAMMING - PYTHON\n\nWe have two approaches for programming in Python. A more Class-based approach or a more function-based approach. Which one do you prefer and why?\n\nAdvanced candidates are expected to mention that this depends on the situation and there is no **one single approach** to programming",
+            "question": "PROGRAMMING - PYTHON\n\nIn Python, you can approach problem solving using class-based (object-oriented) designs or functional programming paradigms. Describe a scenario in a data science project (for example, in experiment design or pricing algorithms) where you would favor one approach over the other. What trade-offs did you consider regarding maintainability, performance, and testability",
             "answer": "",
             "score": 0,
             "feedback": "",
         },
         {
-            "question": "PROGRAMMING - PYTHON\n\nBenefits of classes? What is the difference between an object and a class? What is the use of the `self` keyword in the class?\n\n**Advanced:** Can you change the word `self` and replace it for something else in Python? Why?",
+            "question": "PROGRAMMING - PYTHON\n\nExplain the benefits and potential pitfalls of using classes in Python. What is the role of the self parameter in class methods, and can you change its name without breaking functionality? Discuss any implications of doing so in a large-scale, collaborative codebase.\n\nWhen would you use abstract classes?",
             "answer": "",
             "score": 0,
             "feedback": "",
         },
         {
-            "question": "PROGRAMMING - PYTHON\n\nHow do you integrate testing into you normal workflow? What libraries do you use in Python?\n\nWhat is a Mock and what is it's use?",
+            "question": "PROGRAMMING - PYTHON\n\nHow do you integrate testing into your regular Python development workflow, particularly when building data pipelines or experimental frameworks? Describe your experience with libraries such as unittest, pytest, or mocking frameworks. How do you design tests that validate both the logic and the data integrity in your pipelines?\n\nIn your testing workflow, how do you use mocking to isolate dependencies? Briefly explain what a mock is and provide an example of when you'd use it to simulate behavior in your code.",
             "answer": "",
             "score": 0,
             "feedback": "",
