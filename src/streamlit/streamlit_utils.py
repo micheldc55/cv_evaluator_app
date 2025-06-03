@@ -54,7 +54,7 @@ def write_status_in_colors(current_status: str, status_mapping_html: dict[str, s
             font-size: {font_size}px;
             font-weight: bold;
         ">
-            STATUS OF FIRST INTERVIEW: {current_status}
+            STATUS OF THIS INTERVIEW: {current_status}
         </div>
     """
     st.write(html_code, unsafe_allow_html=True)

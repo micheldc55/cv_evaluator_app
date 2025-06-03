@@ -98,6 +98,21 @@ def load_interview_questions(candidate_id: str) -> InterviewQuestionList:
         return InterviewQuestionList(questions=[], global_feedback="")
 
 
+def load_second_interview_questions(candidate_id: str) -> InterviewQuestionList:
+    """
+    Load interview questions for a candidate from a JSON file.
+    Returns an InterviewQuestionList. If the file doesn't exist, returns an empty list.
+    """
+    candidate_dir = get_candidate_folder(candidate_id)
+    filepath = os.path.join(candidate_dir, "second_interview_questions.json")
+    if os.path.exists(filepath):
+        with open(filepath, "r") as f:
+            data = json.load(f)
+        return InterviewQuestionList.model_validate(data)
+    else:
+        return InterviewQuestionList(questions=[], global_feedback="")
+
+
 def save_interview_questions(candidate_id: str, iq_list: InterviewQuestionList):
     """
     Save the InterviewQuestionList data to a JSON file in the candidate folder.
@@ -105,6 +120,17 @@ def save_interview_questions(candidate_id: str, iq_list: InterviewQuestionList):
     candidate_dir = get_candidate_folder(candidate_id)
     os.makedirs(candidate_dir, exist_ok=True)
     filepath = os.path.join(candidate_dir, "interview_questions.json")
+    with open(filepath, "w") as f:
+        f.write(json.dumps(iq_list.model_dump()))
+
+
+def save_second_interview_qestions(candidate_id: str, iq_list: InterviewQuestionList):
+    """
+    Save the InterviewQuestionList data to a JSON file in the candidate folder.
+    """
+    candidate_dir = get_candidate_folder(candidate_id)
+    os.makedirs(candidate_dir, exist_ok=True)
+    filepath = os.path.join(candidate_dir, "second_interview_questions.json")
     with open(filepath, "w") as f:
         f.write(json.dumps(iq_list.model_dump()))
 
