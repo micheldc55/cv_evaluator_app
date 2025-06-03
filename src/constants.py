@@ -16,7 +16,7 @@ STATUS_COLOR_MAPPING = {
 PDF_WIDTH = 1500
 PDF_HEIGHT = 1500
 
-APP_PAGES = ["Upload CVs", "Evaluate Candidate", "Interview", "Overview"]
+APP_PAGES = ["Upload CVs", "Evaluate Candidate", "Interview 1", "Interview 2", "Overview"]
 
 #### DOCUMENT CONFIGS
 CHUNK_SIZE = 1000
@@ -136,6 +136,12 @@ BASE_QUESTIONS = {
             "feedback": "",
         },
         {
+            "question": "PROGRAMMING - PYTHON\n\nYou need to write a Python script that:\n\n1.  Fetches data from an API\n2.  Transforms the data\n3.  Saves the result to a CSV file.\n\nHow would you structure this code to make it testable and maintainable?\n\nDescribe the key functions or modules you’d create and how you’d organize the code.",
+            "answer": "",
+            "score": 0,
+            "feedback": "",
+        },
+        {
             "question": 'PROGRAMMING - PYTHON\n\nClean Coding Practices:\n\n1) Can you name a few? e.g: Functions do one thing, clean names, avoid duplication, etc.\n2) Can you provide an example of how you integrate them into your workflow?\n3) Imagine you are reviewing a PR and you see this function:\n\n```python\ndef get_flight_output_plus_tax(flight_key):\n    data = get_flight_from_dynamo_db(flight_key)\n    return data["price"] * 1.22\n```',
             "answer": "",
             "score": 0,
@@ -209,5 +215,11 @@ BASE_QUESTIONS = {
             "feedback": "",
         },
     ],
+    "global_feedback": "",
+}
+
+### SECOND INTERVIEW QUESTIONS:
+BASE_SECOND_INTERVIEW_QUESTIONS = {
+    "questions": [],
     "global_feedback": "",
 }

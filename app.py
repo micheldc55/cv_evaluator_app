@@ -3,7 +3,8 @@ from src.constants import APP_PAGES
 from src.llms.llm_utils import save_key_to_session
 from src.page_candidates_overview import overview_page
 from src.page_evaluate_candidate import evaluate_candidate_page
-from src.page_intervew import interview_page
+from src.page_second_interview import second_interview_page
+from src.page_interview import interview_page
 from src.page_upload_cv import upload_cv_page
 from src.streamlit.streamlit_utils import add_n_whitespaces_to_obj
 
@@ -23,8 +24,11 @@ def main():
     elif page == "Evaluate Candidate":
         evaluate_candidate_page()
 
-    elif page == "Interview":
+    elif page == "Interview 1":
         interview_page()
+
+    elif page == "Interview 2":
+        second_interview_page()
 
     elif page == "Overview":
         overview_page()
