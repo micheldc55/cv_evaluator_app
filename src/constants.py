@@ -16,7 +16,21 @@ STATUS_COLOR_MAPPING = {
 PDF_WIDTH = 1500
 PDF_HEIGHT = 1500
 
-APP_PAGES = ["Upload CVs", "Evaluate Candidate", "Interview 1", "Interview 2", "Overview"]
+PAGE_UPLOAD_CV = "Upload CVs"
+PAGE_EVALUATE_CANDIDATE = "Evaluate Candidate"
+PAGE_INTERVIEW_1 = "Interview 1"
+PAGE_INTERVIEW_2 = "Interview 2"
+PAGE_OVERVIEW = "Overview"
+PAGE_EXPORT_BASE_QUESTIONS = "Export Questions"
+
+APP_PAGES = [
+    PAGE_UPLOAD_CV, 
+    PAGE_EVALUATE_CANDIDATE, 
+    PAGE_INTERVIEW_1, 
+    PAGE_INTERVIEW_2, 
+    PAGE_OVERVIEW,
+    PAGE_EXPORT_BASE_QUESTIONS
+]
 
 #### DOCUMENT CONFIGS
 CHUNK_SIZE = 1000
