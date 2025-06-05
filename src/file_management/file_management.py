@@ -140,3 +140,13 @@ def read_dict_into_iq_list(data: dict) -> InterviewQuestionList:
     Read a dictionary into an InterviewQuestionList.
     """
     return InterviewQuestionList.model_validate(data)
+
+
+def read_and_format_json_to_text(json_dict: dict) -> str:
+    output = ""
+
+    for idx, item in enumerate(json_dict, 1):
+        output += f"### Question {idx}\n\n"
+        output += f"{item['question'].strip()}\n\n"
+
+    return output
